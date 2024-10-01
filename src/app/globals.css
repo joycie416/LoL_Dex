@@ -14,12 +14,13 @@
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  body {
+    max-width: 1024px;
+    color: white;
+    margin: 0 auto;
+  }
 }
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -31,5 +32,4 @@ body {
 
 * {
   box-sizing: border-box;
-  color: white;
 }
