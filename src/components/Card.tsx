@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const Card = ({ type,
+const Card = ({
+  type,
   name,
   title,
   text,
@@ -13,9 +14,10 @@ const Card = ({ type,
 }) => {
   return (
     <Link
-      href={type === 'champion' ? `/champions/${name}` : '#'}
-      className={`card min-w-[165px] p-4 flex flex-col gap-2 items-center p-2 border broder-white rounded-lg bg-black ${type === 'champion' || 'cursor-default' }`}
-      key={name}
+      href={type === "champion" ? `/champions/${name}` : "#"}
+      className={`card min-w-[165px] p-4 flex flex-col gap-2 items-center p-2 border broder-white rounded-lg bg-black ${
+        type === "champion" || "cursor-default"
+      }`}
     >
       <Image
         src={`https://ddragon.leagueoflegends.com/cdn/14.19.1/img/${type}/${name}.png`}

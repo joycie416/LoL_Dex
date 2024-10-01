@@ -5,8 +5,6 @@ import Card from '@/components/Card';
 const ItemsPage = async () => {
 
   const data = await getItems();
-  console.log(data[0])
-
 
   return (
     <div className="w-full min-w-fit">
@@ -15,7 +13,7 @@ const ItemsPage = async () => {
         {data.map((info) => {
           const [name, content] = info;
           return (
-            <Card type={'item'} name={name} title={content.name} text={content.plaintext}/>
+            <Card type={'item'} name={name} title={content.name} text={content.plaintext} key={name}/>
           );
         })}
       </div>

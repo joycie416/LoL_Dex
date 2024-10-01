@@ -24,7 +24,7 @@ const RotationPage =  async () => {
         {freeChampions.map((info) => {
           const [name, content] = info;
           return (
-            <Card type={'champion'} name={name} title={content.name} text={content.title}/>
+            <Card type={'champion'} name={name} title={content.name} text={content.title} key={name}/>
           );
         })}
       </div>
@@ -33,7 +33,7 @@ const RotationPage =  async () => {
         {freeChampionsForNewPlayers.map((info) => {
           const [name, content] = info;
           return (
-            <Card type={'champion'} name={name} title={content.name} text={content.title}/>
+            <Card type={'champion'} name={name} title={content.name} text={content.title} key={name}/>
           );
         })}
       </div>

@@ -56,7 +56,7 @@ export async function getItems(): Promise<[string, IType][]> {
       "Content-Type": "application/json",
     },
     next: {
-      revalidate: 24*60*60*1000 // 24시간
+      revalidate: 24*60*60 // 24시간
     }
   });
   const { data } = await res.json();

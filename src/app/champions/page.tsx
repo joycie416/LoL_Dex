@@ -16,7 +16,7 @@ const ChampionsPage = async () => {
         {data.map((info) => {
           const [name, content] = info;
           return (
-            <Card type={'champion'} name={name} title={content.name} text={content.title}/>
+            <Card type={'champion'} name={name} title={content.name} text={content.title} key={name}/>
           );
         })}
       </div>
