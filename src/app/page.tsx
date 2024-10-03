@@ -7,7 +7,7 @@ import rotation from "@/assets/rotation.png";
 export default function Home() {
   return (
     <div className="flex flex-col gap-10 items-center mb-10">
-      <p className="title text-2xl">Information App for LoL</p>
+      <p className="page-title text-2xl">Information App for LoL</p>
       <Link href={"/champions"} className="flex flex-col gap-4 items-center">
         <Image
           src={champions}
@@ -20,7 +20,7 @@ export default function Home() {
             objectFit: "cover",
           }}
         />
-        <p className="text-white">To Champion List</p>
+        <p className="page-title text-white">To Champion List</p>
       </Link>
       <Link href={"/items"} className="flex flex-col gap-4 items-center">
         <Image
@@ -34,7 +34,7 @@ export default function Home() {
             objectFit: "cover",
           }}
         />
-        <p className="text-white">To Item List</p>
+        <p className="page-title text-white">To Item List</p>
       </Link>
       <Link href={"/rotation"} className="flex flex-col gap-4 items-center">
         <Image
@@ -48,7 +48,7 @@ export default function Home() {
             objectFit: "cover",
           }}
         />
-        <p className="text-white">To Rotation List</p>
+        <p className="page-title text-white">To Rotation List</p>
       </Link>
     </div>
   );

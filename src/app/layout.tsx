@@ -18,7 +18,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="bg-black">
         <header className="nav-bar px-4 py-1 bg-black sticky top-0 z-10">
-          <nav className="text-white text-lg w-full flex justify-between items-center">
+          <nav className="nav-bar text-lg w-full flex justify-between items-center">
             <Link href={"/"}>
               <Image src={logo} alt="LoL-logo.png"
           style={{

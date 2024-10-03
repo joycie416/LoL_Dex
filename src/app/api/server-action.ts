@@ -8,7 +8,7 @@ const API_KEY = process.env.RIOT_API_KEY;
 
 // Get all champion data
 const CHAMPIONS_URL =
-  "https://ddragon.leagueoflegends.com/cdn/14.19.1/data/en_US/champion.json";
+  "https://ddragon.leagueoflegends.com/cdn/14.19.1/data/ko_KR/champion.json";
 export async function getChampions(): Promise<[string, CType][] | null> {
   try {
     const res = await fetch(CHAMPIONS_URL, {
@@ -30,7 +30,7 @@ export async function getChampions(): Promise<[string, CType][] | null> {
 
 // Get data of certain champion
 const CHAMPION_URL =
-  "https://ddragon.leagueoflegends.com/cdn/14.19.1/data/en_US/champion";
+  "https://ddragon.leagueoflegends.com/cdn/14.19.1/data/ko_KR/champion";
 export async function getChampion(name: string): Promise<SType | null> {
   try {
     const res = await fetch(CHAMPION_URL + `/${name}.json`, {
@@ -63,7 +63,7 @@ export async function getChampion(name: string): Promise<SType | null> {
 
 // Get item data
 const ITEMS_URL =
-  "https://ddragon.leagueoflegends.com/cdn/14.19.1/data/en_US/item.json";
+  "https://ddragon.leagueoflegends.com/cdn/14.19.1/data/ko_KR/item.json";
 export async function getItems(): Promise<[string, IType][] | null> {
   try {
     const res = await fetch(ITEMS_URL, {

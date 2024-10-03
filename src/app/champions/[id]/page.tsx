@@ -36,12 +36,12 @@ const ChapionDetailPage = async ({ params }: Params) => {
       <CarouselContainer id={id} skins={data?.skins}/>
       <p className="lore my-5">{data ? data?.lore : "Loading..."}</p>
       <div>
-        <p className="text-white text-2xl mb-1">Stats</p>
+        <p className="page-title text-white text-2xl mb-1">Stats</p>
         <ul className="flex flex-col gap-1 text-white ml-6">
-          <li className="list-disc">Attack: {data?.info?.attack}</li>
-          <li className="list-disc">Defense: {data?.info?.defense}</li>
-          <li className="list-disc">Magic: {data?.info?.magic}</li>
-          <li className="list-disc">Difficulty: {data?.info?.difficulty}</li>
+          <li className="list-disc">공격력: {data?.info?.attack}</li>
+          <li className="list-disc">방어력: {data?.info?.defense}</li>
+          <li className="list-disc">마법력: {data?.info?.magic}</li>
+          <li className="list-disc">난이도: {data?.info?.difficulty}</li>
         </ul>
       </div>
     </div>
