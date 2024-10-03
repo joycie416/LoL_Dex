@@ -385,7 +385,7 @@ export type CType = {
   };
 };
 
-type skins = {
+export type skin = {
   id: string;
   num: number;
   name: string;
@@ -448,7 +448,7 @@ export type SType = {
   name: string,
   title: string,
   image: image,
-  skins: skins[],
+  skins: skin[],
   lore: string,
   blurb: string,
   allytips: string[],

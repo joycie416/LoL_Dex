@@ -10,9 +10,9 @@ const ChampionsPage = async () => {
   // console.log('}')
 
   return (
-    <div className="w-full min-w-fit">
-      <p className="text-2xl text-red-500 mb-4">Champions List</p>
-      <div className="grid grid-cols-4 gap-4">
+    <div className="w-full min-w-fit mb-4">
+      <p className="page-title text-2xl ml-4 mb-4">Champion List</p>
+      <div className="card-container">
         {!data ? (
           <>Loading...</>
         ) : (

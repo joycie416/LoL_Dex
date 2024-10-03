@@ -31,13 +31,13 @@ const RotationPage = () => {
 
   return (
     <div className="w-full min-w-fit">
-      <p className="text-2xl text-red-500 mb-4">Rotation List</p>
-      <p className="text-xl text-white mb-4">Free champions</p>
+      <p className="page-title text-2xl ml-4 mb-4">Rotation List</p>
+      <p className="page-title text-white text-xl ml-4 mb-4">Free champions</p>
       {/* <div className="grid grid-cols-4 gap-4"> */}
       {!(freeChampions ? freeChampions[0] : null) ? (
-        <p className="text-gray-400">Loading...</p>
+        <p className="text-gray-400 ml-4">Loading...</p>
       ) : (
-        <div className="grid grid-cols-4 gap-4">
+        <div className="card-container">
           {freeChampions?.map((info) => {
             const [name, content] = info;
             return (
@@ -53,12 +53,12 @@ const RotationPage = () => {
         </div>
       )}
       {/* </div> */}
-      <p className="text-xl text-white my-4">Free champions for new players</p>
+      <p className="page-title text-white text-xl ml-4 my-4">Free champions for new players</p>
       {/* <div className="grid grid-cols-4 gap-4"> */}
       {!(freeChampionsForNewPlayers ? freeChampionsForNewPlayers[0] : null) ? (
-        <p className="text-gray-400">Loading...</p>
+        <p className="text-gray-400 ml-4">Loading...</p>
       ) : (
-        <div className="grid grid-cols-4 gap-4">
+        <div className="card-container">
           {freeChampionsForNewPlayers?.map((info) => {
             const [name, content] = info;
             return (
