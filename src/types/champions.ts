@@ -1,4 +1,4 @@
-export const CHAMPION_NAMES = [
+export const CHAMPION_NAMES:(string)[] = [
   "Aatrox",
   "Ahri",
   "Akali",
