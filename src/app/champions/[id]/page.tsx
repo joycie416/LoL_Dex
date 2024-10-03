@@ -29,7 +29,7 @@ const ChapionDetailPage = async ({ params }: Params) => {
 
   return (
     <div className="px-4 mb-4">
-      <h3 className="title text-4xl mb-1">{data?.name ?? id}</h3>
+      <h3 className="title text-4xl mb-3">{data?.name ?? id}</h3>
       <h3 className="text-2xl text-gray-400 mb-5">
         {data?.title ?? "Loading..."}
       </h3>
