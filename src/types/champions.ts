@@ -385,7 +385,7 @@ export type CType = {
   };
 };
 
-type skin = {
+export type skin = {
   id: string;
   num: number;
   name: string;

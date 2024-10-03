@@ -17,10 +17,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-black">
-        <header className="nav-bar px-4 py-1 bg-black sticky top-0 z-1">
+        <header className="nav-bar px-4 py-1 bg-black sticky top-0 z-10">
           <nav className="title text-white w-full flex justify-between items-center">
             <Link href={"/"}>
-              <Image src={logo} width={150} height={100} style={{height:'auto'}} alt="LoL-logo.png" />
+              <Image src={logo} width={150} height={100} alt="LoL-logo.png" />
             </Link>
             <ul className="flex gap-4">
               <li>
