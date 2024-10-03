@@ -25,7 +25,7 @@ const Card = ({
         height={100}
         alt={name}
       />
-      <p className="text-red-500">{title}</p>
+      <p className="title">{title}</p>
       <p className="text-[14px] text-justify text-gray-400">{text}</p>
     </Link>
   );

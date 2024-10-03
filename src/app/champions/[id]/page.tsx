@@ -27,26 +27,26 @@ const ChapionDetailPage = async ({ params }: Params) => {
   // console.log("Champion detail :", data);
 
   return (
-    <div>
-      <h3 className="text-4xl text-red-500 ">{data?.name ?? params.id}</h3>
+    <div className="px-4">
+      <h3 className="title text-4xl">{data?.name ?? params.id}</h3>
       <h3 className="text-2xl text-gray-400 my-5">
         {data?.title ?? "Loading..."}
       </h3>
       <Image
-        src={`https://ddragon.leagueoflegends.com/cdn/14.19.1/img/champion/${params.id}.png`}
-        width={200}
+        src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${params.id}_0.jpg`}
+        width={1024}
         height={200}
         alt={params.id}
         className="mx-auto my-5"
       />
       <p className="mb-5">{data ? data?.lore : "Loading..."}</p>
       <div>
-        <p className="text-2xl mb-1">Stats</p>
-        <ul className="flex flex-col gap-1 ml-6">
-          <li className="list-disc">공격력: {data?.info?.attack}</li>
-          <li className="list-disc">방어력: {data?.info?.defense}</li>
-          <li className="list-disc">마볍력: {data?.info?.magic}</li>
-          <li className="list-disc">난이도: {data?.info?.difficulty}</li>
+        <p className="title text-white text-2xl mb-1">Stats</p>
+        <ul className="flex flex-col gap-1 title text-white ml-6">
+          <li className="list-disc">Attack: {data?.info?.attack}</li>
+          <li className="list-disc">Defense: {data?.info?.defense}</li>
+          <li className="list-disc">Magic: {data?.info?.magic}</li>
+          <li className="list-disc">Difficulty: {data?.info?.difficulty}</li>
         </ul>
       </div>
     </div>

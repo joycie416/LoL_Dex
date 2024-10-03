@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('//fonts.googleapis.com/earlyaccess/notosanskr.css');
+@font-face {
+  font-family: 'Cafe24ClassicType-Regular';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-2@1.0/Cafe24ClassicType-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -17,8 +25,10 @@
 @layer base {
   body {
     max-width: 1024px;
+    min-width: 420px;
     color: white;
     margin: 0 auto;
+    font-family: 'noto-sans', 'sans-serif';
   }
 }
 @layer utilities {
@@ -28,6 +38,27 @@
 }
 
 @layer component {
+  .title {
+    font-family: 'Cafe24ClassicType-Regular';
+    color: red;
+  }
+  .card-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  @media screen and (max-width: 850px) {
+    .card-container {
+      grid-template-columns: repeat(3, 1fr);
+
+    }
+  }
+  @media screen and (max-width: 570px) {
+    .card-container {
+      grid-template-columns: repeat(2, 1fr);
+
+    }
+  }
 }
 
 * {

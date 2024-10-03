@@ -7,14 +7,14 @@ import rotation from "@/assets/rotation.png";
 export default function Home() {
   return (
     <div className="flex flex-col gap-10 items-center mb-10">
-      <p className="text-3xl text-red-500">Information App for LoL</p>
+      <p className="title text-2xl">Information App for LoL</p>
       <Link href={"/champions"} className="flex flex-col gap-4 items-center">
         <Image
           src={champions}
           width={450}
           height={400}
           alt="champions"
-          style={{ aspectRatio: "4/3", objectFit: "cover" }}
+          style={{ aspectRatio: "4/3", height: 'auto', objectFit: "cover" }}
         />
         <p>To Champion List</p>
       </Link>
@@ -24,7 +24,7 @@ export default function Home() {
           width={450}
           height={450}
           alt="items"
-          style={{ aspectRatio: "4/3", objectFit: "cover" }}
+          style={{ aspectRatio: "4/3", height: 'auto', objectFit: "cover" }}
         />
         <p>To Item List</p>
       </Link>
@@ -34,7 +34,7 @@ export default function Home() {
           width={450}
           height={450}
           alt="rotation"
-          style={{ aspectRatio: "4/3", objectFit: "cover" }}
+          style={{ aspectRatio: "4/3", height: 'auto', objectFit: "cover" }}
         />
         <p>To Rotation List</p>
       </Link>
