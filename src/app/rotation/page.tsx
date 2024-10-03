@@ -30,7 +30,7 @@ const RotationPage = () => {
   });
 
   return (
-    <div className="w-full min-w-fit">
+    <div className="w-full min-w-fit mb-4">
       <p className="page-title text-2xl ml-4 mb-4">Rotation List</p>
       <p className="page-title text-white text-xl ml-4 mb-4">Free champions</p>
       {/* <div className="grid grid-cols-4 gap-4"> */}
