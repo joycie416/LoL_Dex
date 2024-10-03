@@ -2,7 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('//fonts.googleapis.com/earlyaccess/notosanskr.css');
+@font-face {
+  font-family: 'SunBatang-Light';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/SunBatang-Light.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 @font-face {
   font-family: 'Cafe24ClassicType-Regular';
   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-2@1.0/Cafe24ClassicType-Regular.woff2') format('woff2');
@@ -16,7 +21,7 @@
     min-width: 420px;
     color: white;
     margin: 0 auto;
-    font-family: 'noto-sans', 'sans-serif';
+    font-family: 'SunBatang-Light', 'sans-serif';
   }
   :root {
     --background: 0 0% 100%;

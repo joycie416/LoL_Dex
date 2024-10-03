@@ -28,16 +28,16 @@ const ChapionDetailPage = async ({ params }: Params) => {
   // console.log("Champion detail :", data);
 
   return (
-    <div className="px-4">
-      <h3 className="title text-4xl">{data?.name ?? id}</h3>
-      <h3 className="text-2xl text-gray-400 my-5">
+    <div className="px-4 mb-4">
+      <h3 className="title text-4xl mb-1">{data?.name ?? id}</h3>
+      <h3 className="text-2xl text-gray-400 mb-5">
         {data?.title ?? "Loading..."}
       </h3>
       <CarouselContainer id={id} skins={data?.skins}/>
       <p className="lore my-5">{data ? data?.lore : "Loading..."}</p>
       <div>
-        <p className="title text-white text-2xl mb-1">Stats</p>
-        <ul className="flex flex-col gap-1 title text-white ml-6">
+        <p className="text-white text-2xl mb-1">Stats</p>
+        <ul className="flex flex-col gap-1 text-white ml-6">
           <li className="list-disc">Attack: {data?.info?.attack}</li>
           <li className="list-disc">Defense: {data?.info?.defense}</li>
           <li className="list-disc">Magic: {data?.info?.magic}</li>
