@@ -1,8 +1,9 @@
+import { CType } from "@/types/champions";
 import { getChampions } from "../api/server-action";
 import Card from "@/components/Card";
 
 const ChampionsPage = async () => {
-  const data = await getChampions();
+  const data:[string, CType][] = await getChampions().then(res => Object.entries(res));
   // console.log('ChampionObj = {')
   // data.forEach(info => {
   //   console.log(`${info[1].key} : "${info[0]}",`)

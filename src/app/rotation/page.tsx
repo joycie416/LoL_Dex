@@ -1,73 +1,84 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { getChampions, getRotation } from "../api/server-action";
+import { getChampions } from "../api/server-action";
 import Card from "@/components/Card";
-import { CType } from "@/types/champions";
+import { CHAMPION_NAMES, CType } from "@/types/champions";
+import { RType } from "@/types/rotation";
 
 const RotationPage = () => {
-  const [rotation, setRotation] = useState<[string, number[]][] | null>([]);
-  const [data, setData] = useState<[string, CType][] | null>([]);
-
-  const fetchData = async () => {
-    getRotation().then(setRotation);
-    getChampions().then(setData);
-  };
+  const [rotation, setRotation] = useState<CType[][]>([]);
 
   useEffect(() => {
-    //   const rotation = await getRotation();
-    // // console.log(rotation)
-    // const data = await getChampions();
+    const fetchData = async () => {
+      const res = await fetch("/api/rotation", { method: "GET" });
+      const rotation: RType = await res.json();
+      console.log(rotation);
+      // let [freeChampions,freeChampionsForNewPlayers] = [rotation.freeChampionIds, rotation.freeChampionIdsForNewPlayers]);
+      // getChampions().then(setData);
 
+      const champions = await getChampions();
+      let freeChampions: CType[] = rotation.freeChampionIds.map(
+        (key) => champions[CHAMPION_NAMES[key]]
+      );
+      let freeChampionsForNewPlayers: CType[] = rotation.freeChampionIds.map(
+        (key) => champions[CHAMPION_NAMES[key]]
+      );
+
+      setRotation([freeChampions, freeChampionsForNewPlayers]);
+    };
     fetchData();
   }, []);
 
-  const freeChampions = data?.filter((info) => {
-    return rotation ? rotation[0][1].includes(+info[1].key) : null;
-  });
-  const freeChampionsForNewPlayers = data?.filter((info) => {
-    return rotation ? rotation[1][1].includes(+info[1].key) : null;
-  });
+  console.log(rotation);
+  // const freeChampions = data?.filter((info) => {
+  //   return rotation ? rotation[0][1].includes(+info[1].key) : null;
+  // });
+  // const freeChampionsForNewPlayers = data?.filter((info) => {
+  //   return rotation ? rotation[1][1].includes(+info[1].key) : null;
+  // });
 
   return (
     <div className="w-full min-w-fit mb-4">
       <p className="page-title text-2xl ml-4 mb-4">Rotation List</p>
       <p className="page-title text-white text-xl ml-4 mb-4">Free champions</p>
       {/* <div className="grid grid-cols-4 gap-4"> */}
-      {!(freeChampions ? freeChampions[0] : null) ? (
+      {!rotation[0] ? (
         <p className="text-gray-400 ml-4">Loading...</p>
       ) : (
         <div className="card-container">
-          {freeChampions?.map((info) => {
-            const [name, content] = info;
+          {rotation[0]?.map((info) => {
+            const tmp = {...info}
             return (
               <Card
                 type={"champion"}
-                name={name}
-                title={content.name}
-                text={content.title}
-                key={name}
+                name={tmp.id}
+                title={tmp.name}
+                text={tmp.title}
+                key={tmp.name}
               />
             );
           })}
         </div>
       )}
       {/* </div> */}
-      <p className="page-title text-white text-xl ml-4 my-4">Free champions for new players</p>
+      <p className="page-title text-white text-xl ml-4 my-4">
+        Free champions for new players
+      </p>
       {/* <div className="grid grid-cols-4 gap-4"> */}
-      {!(freeChampionsForNewPlayers ? freeChampionsForNewPlayers[0] : null) ? (
+      {!rotation[1] ? (
         <p className="text-gray-400 ml-4">Loading...</p>
       ) : (
         <div className="card-container">
-          {freeChampionsForNewPlayers?.map((info) => {
-            const [name, content] = info;
+          {rotation[1]?.map((info) => {
+            const tmp = {...info}
             return (
               <Card
                 type={"champion"}
-                name={name}
-                title={content.name}
-                text={content.title}
-                key={name}
+                name={tmp.id}
+                title={tmp.name}
+                text={tmp.title}
+                key={tmp.name}
               />
             );
           })}
