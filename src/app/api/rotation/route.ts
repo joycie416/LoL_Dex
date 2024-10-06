@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { RType } from "@/types/rotation";
-// import { getRotation } from "../server-action";
+import { ChampionObj, CType } from "@/types/champions";
+import { getChampions } from "../server-action";
 
 const API_KEY = process.env.RIOT_API_KEY;
 
@@ -17,11 +18,21 @@ export async function GET() {
         "X-RIOT-TOKEN": API_KEY || "",
       },
     });
+    const champions = await getChampions();
 
-    if (res.ok) {
-      const data = await res.json();
-      console.log("get ro data:", data);
-      return NextResponse.json(data);
+
+    if (res.ok && !!champions) {
+      const rotation: RType = await res.json();
+      let freeChampions: CType[] = rotation.freeChampionIds.map(
+        (key) => champions[ChampionObj[key]]
+      );
+      let freeChampionsForNewPlayers: CType[] = rotation.freeChampionIdsForNewPlayers.map(
+        (key) => champions[ChampionObj[key]]
+      );
+
+
+      // console.log("get ro data:", data);
+      return NextResponse.json({data: [freeChampions, freeChampionsForNewPlayers]});
     } else {
       console.error(new Error("Fail to fetch rotation data"));
       return NextResponse.json(

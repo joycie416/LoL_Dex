@@ -20,8 +20,14 @@ export async function getChampions() {
         revalidate: 24 * 60 * 60, // 24시간
       },
     });
-    const { data } = await res.json();
-    return data;
+
+    if (res.ok) {
+      const { data } = await res.json();
+      return data;
+    } else {
+      console.error(new Error("Fail to fetch rotation data"));
+      return { message: "Fail to fetch rotation data", status: res.status };
+    }
   } catch (err) {
     console.error(err);
     return null;
@@ -31,7 +37,7 @@ export async function getChampions() {
 // Get data of certain champion
 const CHAMPION_URL =
   "https://ddragon.leagueoflegends.com/cdn/14.19.1/data/ko_KR/champion";
-export async function getChampion(name: string): Promise<SType | null> {
+export async function getChampion(name: string) {
   try {
     const res = await fetch(CHAMPION_URL + `/${name}.json`, {
       method: "GET",
@@ -40,8 +46,14 @@ export async function getChampion(name: string): Promise<SType | null> {
       },
       // cache: 'no-store'
     });
-    const { data } = await res.json();
-    return data[name];
+
+    if (res.ok) {
+      const { data } = await res.json();
+      return data[name];
+    } else {
+      console.error(new Error("Fail to fetch rotation data"));
+      return { message: "Fail to fetch rotation data", status: res.status };
+    }
   } catch (err) {
     console.error(err);
     return null;
@@ -64,22 +76,24 @@ export async function getChampion(name: string): Promise<SType | null> {
 // Get item data
 const ITEMS_URL =
   "https://ddragon.leagueoflegends.com/cdn/14.19.1/data/ko_KR/item.json";
-export async function getItems(): Promise<[string, IType][] | null> {
+export async function getItems() {
   try {
     const res = await fetch(ITEMS_URL, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-      // next: {
-      //   revalidate: 24 * 60 * 60, // 24시간
-      // },
     });
-    const { data } = await res.json();
-    return Object.entries(data);
+
+    if (res.ok) {
+      const { data } = await res.json();
+      return Object.entries(data);
+    } else {
+      console.error(new Error("Fail to fetch rotation data"));
+      return { message: "Fail to fetch rotation data", status: res.status };
+    }
   } catch (err) {
     console.error(err);
     return null;
   }
 }
-
