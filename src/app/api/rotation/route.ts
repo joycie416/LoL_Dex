@@ -20,30 +20,25 @@ export async function GET() {
     });
     const champions = await getChampions();
 
-
     if (res.ok && !!champions) {
       const rotation: RType = await res.json();
-      let freeChampions: CType[] = rotation.freeChampionIds.map(
+      const freeChampions: CType[] = rotation.freeChampionIds.map(
         (key) => champions[ChampionObj[key]]
       );
-      let freeChampionsForNewPlayers: CType[] = rotation.freeChampionIdsForNewPlayers.map(
-        (key) => champions[ChampionObj[key]]
-      );
+      const freeChampionsForNewPlayers: CType[] =
+        rotation.freeChampionIdsForNewPlayers.map(
+          (key) => champions[ChampionObj[key]]
+        );
 
-
-      // console.log("get ro data:", data);
-      return NextResponse.json({data: [freeChampions, freeChampionsForNewPlayers]});
+      return NextResponse.json({
+        data: [freeChampions, freeChampionsForNewPlayers],
+      });
     } else {
       console.error(new Error("Fail to fetch rotation data"));
-      return NextResponse.json(
-        { message: "Fail to fetch rotation data" },
-        { status: res.status }
-      );
+      throw new Error("Fail to fetch rotation data");
     }
   } catch (err) {
     console.error(err);
     return NextResponse.json(err);
   }
-
-  // return NextResponse.json({data:res})
 }

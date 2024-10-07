@@ -1,9 +1,5 @@
-
-
 import { getChampion } from "@/app/api/server-action";
 import CarouselContainer from "@/components/_/Carousel";
-import { Metadata } from "next";
-import Image from "next/image";
 
 type Params = {
   params: {
@@ -22,10 +18,8 @@ export const generateMetadata = async ({ params }: Params) => {
 };
 
 const ChapionDetailPage = async ({ params }: Params) => {
-  const id = params.id
+  const id = params.id;
   const data = await getChampion(id);
-
-  // console.log("Champion detail :", data);
 
   return (
     <div className="px-4 mb-4">
@@ -33,7 +27,7 @@ const ChapionDetailPage = async ({ params }: Params) => {
       <h3 className="text-2xl text-gray-400 mb-5">
         {data?.title ?? "Loading..."}
       </h3>
-      <CarouselContainer id={id} skins={data?.skins}/>
+      <CarouselContainer id={id} skins={data?.skins} />
       <p className="lore my-5">{data ? data?.lore : "Loading..."}</p>
       <div>
         <p className="page-title text-white text-2xl mb-1">Stats</p>

@@ -406,7 +406,7 @@ type spell = {
   cooldownBurn: string;
   cost: number[];
   costBurn: string;
-  datavalues: {};
+  datavalues: object;
   effect: [
     null,
     number[],

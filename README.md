@@ -116,21 +116,23 @@ const ChapionDetailPage = async ({ params }: Params) => {
 2. Riot API에서 데이터 가져오기
 
 ```tsx
+// Get data of certain champion
 const CHAMPION_URL =
   "https://ddragon.leagueoflegends.com/cdn/14.19.1/data/ko_KR/champion";
-export async function getChampion(name: string): Promise<SType | null> {
-  try {
-    const res = await fetch(CHAMPION_URL + `/${name}.json`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+export async function getChampion(name: string): Promise<SType> {
+  const res = await fetch(CHAMPION_URL + `/${name}.json`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (res.ok) {
     const { data } = await res.json();
     return data[name];
-  } catch (err) {
-    console.error(err);
-    return null;
+  } else {
+    console.error(new Error("Fail to fetch champion data"));
+    throw new Error("Fail to fetch champion data");
   }
 }
 ```
@@ -138,6 +140,10 @@ export async function getChampion(name: string): Promise<SType | null> {
 3. `shadcn` 라이브러리를 사용해 챔피언 스킨 이미지 캐러셀로 보여주기
 
 - `loop: true`, `stopOnInteraction: false` 옵션 추가해 회전하며 마우스가 캐러셀에서 사라지면 다시 자동 재생되도록 함
+- 그런데 `playOnInit: true` 옵션을 주어도 시작 시 자동 재생되지 않는 문제가 있음.
+- 버튼으로 캐러셀을 넘기면 자동 재생이 멈추는 문제가 있음. 마우스로 넘기면 자동 재생 됨.
+
+<br>
 
 4. 존재하지 않는 챔피언 이름으로 상세페이지 접근 시 미들웨어를 통해 챔피언 페이지로 redirect
 
@@ -168,28 +174,58 @@ export const config = {
 'use client'
 
 const RotationPage = () => {
-  const [rotation, setRotation] = useState<[string, number[]][] | null>([]);
-  const [data, setData] = useState<[string, CType][] | null>([]);
-
-  const fetchData = async () => {
-    getRotation().then(setRotation);
-    getChampions().then(setData);
-  };
+  const [rotation, setRotation] = useState<CType[][]>([]);
 
   useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch("/api/rotation", { method: "GET" });
+      const { data } = await res.json();
+
+      setRotation(data);
+    };
     fetchData();
   }, []);
-
   return (
-    ...
-  )
+    <>
+      <p className="page-title text-white text-xl ml-4 mb-4">Free champions</p>
+      <div className="card-container">
+        {rotation[0]?.map((info) => {
+          return (
+            <Card
+              type={"champion"}
+              name={info.id}
+              title={info.name}
+              text={info.title}
+              key={info.name}
+            />
+          );
+        })}
+      </div>
+      <p className="page-title text-white text-xl ml-4 my-4">
+        Free champions for new players
+      </p>
+      <div className="card-container">
+        {rotation[1]?.map((info) => {
+          return (
+            <Card
+              type={"champion"}
+              name={info.id}
+              title={info.name}
+              text={info.title}
+              key={info.name}
+            />
+          );
+        })}
+      </div>
+    </>
+  );
 };
+
+export default RotationPage;
 ```
 
 
 
 ## 💥 Trouble Shooting
 
-#### 시작 페이지
-
-🔥 문제점
+트러블 슈팅과 좀더 자세한 구현 설명은 [블로그](https://joycie416.tistory.com/entry/Nextjs-%EB%A6%AC%EA%B7%B8%EC%98%A4%EB%B8%8C%EB%A0%88%EC%A0%84%EB%93%9C-%EC%B1%94%ED%94%BC%EC%96%B8-%EC%95%84%EC%9D%B4%ED%85%9C-%EC%A0%95%EB%B3%B4-%EC%A0%9C%EA%B3%B5%ED%95%98%EB%8A%94-%EC%82%AC%EC%9D%B4%ED%8A%B8-%EB%A7%8C%EB%93%A4%EA%B8%B0)를 참고하시기 바랍니다.
