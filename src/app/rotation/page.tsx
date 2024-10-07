@@ -1,80 +1,61 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { getChampions, getRotation } from "../api/server-action";
 import Card from "@/components/Card";
 import { CType } from "@/types/champions";
+import { useEffect, useState } from "react";
 
 const RotationPage = () => {
-  const [rotation, setRotation] = useState<[string, number[]][] | null>([]);
-  const [data, setData] = useState<[string, CType][] | null>([]);
-
-  const fetchData = async () => {
-    getRotation().then(setRotation);
-    getChampions().then(setData);
-  };
+  const [rotation, setRotation] = useState<CType[][]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    //   const rotation = await getRotation();
-    // // console.log(rotation)
-    // const data = await getChampions();
+    const fetchData = async () => {
+      const res = await fetch("/api/rotation", { method: "GET" });
+      const { data } = await res.json();
 
+      setRotation(data);
+      setIsLoading(false)
+    };
     fetchData();
   }, []);
 
-  const freeChampions = data?.filter((info) => {
-    return rotation ? rotation[0][1].includes(+info[1].key) : null;
-  });
-  const freeChampionsForNewPlayers = data?.filter((info) => {
-    return rotation ? rotation[1][1].includes(+info[1].key) : null;
-  });
-
   return (
-    <div className="w-full min-w-fit mb-4">
-      <p className="page-title text-2xl ml-4 mb-4">Rotation List</p>
+    <>
       <p className="page-title text-white text-xl ml-4 mb-4">Free champions</p>
-      {/* <div className="grid grid-cols-4 gap-4"> */}
-      {!(freeChampions ? freeChampions[0] : null) ? (
+      <div className="card-container">
+        {isLoading ? 
         <p className="text-gray-400 ml-4">Loading...</p>
-      ) : (
-        <div className="card-container">
-          {freeChampions?.map((info) => {
-            const [name, content] = info;
-            return (
-              <Card
-                type={"champion"}
-                name={name}
-                title={content.name}
-                text={content.title}
-                key={name}
-              />
-            );
-          })}
-        </div>
-      )}
-      {/* </div> */}
-      <p className="page-title text-white text-xl ml-4 my-4">Free champions for new players</p>
-      {/* <div className="grid grid-cols-4 gap-4"> */}
-      {!(freeChampionsForNewPlayers ? freeChampionsForNewPlayers[0] : null) ? (
+        : rotation[0]?.map((info) => {
+          return (
+            <Card
+              type={"champion"}
+              name={info.id}
+              title={info.name}
+              text={info.title}
+              key={info.name}
+            />
+          );
+        })}
+      </div>
+      <p className="page-title text-white text-xl ml-4 my-4">
+        Free champions for new players
+      </p>
+      <div className="card-container">
+        {isLoading ? 
         <p className="text-gray-400 ml-4">Loading...</p>
-      ) : (
-        <div className="card-container">
-          {freeChampionsForNewPlayers?.map((info) => {
-            const [name, content] = info;
-            return (
-              <Card
-                type={"champion"}
-                name={name}
-                title={content.name}
-                text={content.title}
-                key={name}
-              />
-            );
-          })}
-        </div>
-      )}
-      {/* </div> */}
-    </div>
+        : rotation[1]?.map((info) => {
+          return (
+            <Card
+              type={"champion"}
+              name={info.id}
+              title={info.name}
+              text={info.title}
+              key={info.name}
+            />
+          );
+        })}
+      </div>
+    </>
   );
 };
 
