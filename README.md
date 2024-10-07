@@ -2,6 +2,8 @@
 
 '리그 오브 레전드'의 챔피언, 아이템, 금주 로테이션에 대한 정보를 제공합니다.
 
+URL: https://lol-1ezpiq6pf-joycie416s-projects.vercel.app/
+
 #### 시작 페이지
 <img src='./images/start.png'>
 
